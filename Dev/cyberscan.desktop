@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Cyberscan
+Encoding=UTF-8
+Exec=sh -c "cyberscan;${SHELL:-bash}"
+Icon=kali-cyberscan.png
+StartupNotify=false
+Terminal=true
+Type=Application
+Categories=01-info-gathering;01-04-network-scanners;02-vulnerability-analysis;
+X-Kali-Package=cyberscan
+Name[C]=Cyberscan

@@ -1,0 +1,53 @@
+#!/bin/bash
+#
+#
+# author : CaptainMGC 
+# Tested on Windows / Linux / Android (Termux)
+# Simple script for Install CyberScan
+#Colors
+cyan='\e[0;36m'
+green='\e[0;32m'
+lightgreen='\e[1;32m'
+white='\e[1;37m'
+red='\e[1;31m'
+yellow='\e[1;33m'
+blue='\e[1;34m'
+#Options
+path=`pwd` # Path
+VeR="V1.0" # Version
+#Check root exist
+[[ `id -u` -eq 0 ]] > /dev/null 2>&1 || { echo  $red "You must be root to run the script"; exit 1; }
+echo -e $cyan ""
+echo " _____      _               _____                 "
+echo "/ ____|    | |             / ____|                "
+echo "| |    _   _| |__   ___ _ _| (___   ___ __ _ _ __  "
+echo "| |   | | | | '_ \ / _ \ '__\___ \ / __/ _ | '_ \ "
+echo "| |___| |_| | |_) |  __/ |  ____) | (_| (_| | | | |"
+echo " \_____\__, |_.__/ \___|_| |_____/ \___\__,_|_| |_|"
+echo "        __/ |                                      "
+echo "       |___/   $VeR"
+echo -e $white "------------------------------"
+echo -e $red "[ ✔ ] Installer The Tool [ ✔ ] "; 
+echo -e $white "------------------------------"
+echo -e $green "[ ! ] Moving CyberScan folder "
+mkdir /usr/share/cyberscan
+cp install /usr/share/cyberscan  
+cp cyberscan /usr/share/cyberscan
+cp update.py /usr/share/cyberscan
+cp -r modules /usr/share/cyberscan
+echo -e $blue "[ ✔ ]Done"
+echo "#!/bin/sh" >> /usr/bin/cyberscan
+echo "cd /usr/share/cyberscan" >> /usr/bin/cyberscan
+echo "exec python3 cyberscan \"\$@\"" >> /usr/bin/cyberscan
+cp $path/Dev/cyberscan.desktop /usr/share/applications/cyberscan.desktop
+cp $path/Dev/kali-cyberscan.png /usr/share/icons/kali-cyberscan.png
+cp cyberscan /usr/local/sbin/cyberscan 
+chmod +x /usr/local/sbin/cyberscan
+chmod +x cyberscan
+echo -e $white "------------------------------------------------------------------------"
+echo -e $red "[ ✔ ] CyberScan Is Installed In Application (information gathering) [ ✔ ]"
+echo -e $white "------------------------------------------------------------------------"
+echo -e $green"╔────────────────────────────╗ "
+echo -e $blue "|Run in Terminal<(cyberscan)> |  "
+echo -e $green"╚────────────────────────────╝ "
+exit

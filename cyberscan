@@ -1,0 +1,204 @@
+#!/usr/bin/env python3
+#  _____      _               _____                 
+# / ____|    | |             / ____|                
+#| |    _   _| |__   ___ _ _| (___   ___ __ _ _ __  
+#| |   | | | | '_ \ / _ \ '__\___ \ / __/ _ | '_ \ 
+#| |___| |_| | |_) |  __/ |  ____) | (_| (_| | | | |
+# \_____\__, |_.__/ \___|_| |_____/ \___\__,_|_| |_|
+#        __/ |                                      
+#       |___/   1.0
+#
+# CyberScan . Version 1.0
+# CyberScan - Information Gathering Tool
+############################################
+# Author: CaptainMGC
+# GitHub: https://github.com/captainmgc
+############################################
+import urllib.request
+from platform import system
+import sys
+import os
+import time
+
+def clear():
+    if system() == 'Linux':
+        os.system("clear")
+    elif system() == 'Windows':
+        os.system('cls')
+        os.system('color a')
+    else:
+        pass
+
+def slowprint(s):
+    for c in s + '\n':
+        sys.stdout.write(c)
+        sys.stdout.flush()
+        time.sleep(4. / 100)
+
+banner = '''
+\033[96m
+ _____      _               _____                 
+/ ____|    | |             / ____|                
+| |    _   _| |__   ___ _ _| (___   ___ __ _ _ __  
+| |   | | | | '_ \ / _ \ '__\___ \ / __/ _ | '_ \ 
+| |___| |_| | |_) |  __/ |  ____) | (_| (_| | | | |
+ \_____\__, |_.__/ \___|_| |_____/ \___\__,_|_| |_|
+        __/ |                                      
+       |___/   v1.0
+\033[93m
+==[[ .:: Name : CyberScan ::.]]==\033[91m
+==[[ .:: Version: 1.0 ::.]]==\033[96m
+==[[ .:: Author : CaptainMGC ::.]]==\033[92m
+==[[ .:: Github : https://github.com/captainmgc ::.]]==\033[93m
+'''
+
+print(banner)
+
+def menu():
+   print('''
+\033[91m 1 \033[96m} \033[91m --\033[93m> \033[92m DNS Lookup 
+\033[91m 2 \033[96m} \033[91m --\033[93m> \033[92m Whois Lookup
+\033[91m 3 \033[96m} \033[91m --\033[93m> \033[92m GeoIP Lookup
+\033[91m 4 \033[96m} \033[91m --\033[93m> \033[92m Subnet Lookup
+\033[91m 5 \033[96m} \033[91m --\033[93m> \033[92m Port Scanner
+\033[91m 6 \033[96m} \033[91m --\033[93m> \033[92m Extract Links 
+\033[91m 7 \033[96m} \033[91m --\033[93m> \033[92m Zone Transfer
+\033[91m 8 \033[96m} \033[91m --\033[93m> \033[92m HTTP Header
+\033[91m 9 \033[96m} \033[91m --\033[93m> \033[92m Host Finder
+\033[91m 10\033[96m} \033[91m --\033[93m> \033[92m IP-Locator
+\033[91m 11\033[96m} \033[91m --\033[93m> \033[92m Traceroute
+\033[91m 12\033[96m} \033[91m --\033[93m> \033[92m Host DNS Finder
+\033[91m 13\033[96m} \033[91m --\033[93m> \033[92m Reverse IP Lookup
+\033[91m 14\033[96m} \033[91m --\033[93m> \033[92m Email Collection
+\033[91m 15\033[96m} \033[91m --\033[93m> \033[92m Install & Update
+\033[91m 16\033[96m} \033[91m --\033[93m> \033[92m About Me 
+\033[91m 00\033[96m} \033[91m --\033[93m> \033[92m Exit
+''')
+
+slowprint("\033[1;91mThis is a modern information gathering tool by:\033[92m CaptainMGC " + "\n \033[93m Let's Start \033[96m --> --> --> \033[91m ")
+
+menu()
+
+def ext():
+    ex = input('\033[92mContinue/Exit->-> ')
+    if ex[0].upper() == 'E':
+           print('Good-bye!!!')
+           exit()
+    else:
+           clear()
+           print(banner)
+           menu()
+           select()
+
+def select():
+  try:
+    choice = int(input("\033[96mEnter \033[92m00/\033[91m16 -> ->  "))
+    if choice == 2:
+      dz = input('\033[91mEnter IP Address : \033[91m')
+      whois = "http://api.hackertarget.com/whois/?q=" + dz
+      dev = urllib.request.urlopen(whois).read().decode('utf-8')
+      print(dev)
+      ext()
+    elif choice == 13:
+      dz = input('\033[92mEnter IP Address : \033[92m')
+      reverse = "http://api.hackertarget.com/reverseiplookup/?q=" + dz
+      lookup = urllib.request.urlopen(reverse).read().decode('utf-8')
+      print(lookup)
+      ext()
+    elif choice == 1:
+      dz = input('\033[96mEnter Your Domain :\033[96m')
+      dns = "http://api.hackertarget.com/dnslookup/?q=" + dz
+      result = urllib.request.urlopen(dns).read().decode('utf-8')
+      print(result)
+      ext()
+    elif choice == 3:
+      dz = input('\033[91mEnter IP Address : \033[91m')
+      geo = "http://api.hackertarget.com/geoip/?q=" + dz
+      ip = urllib.request.urlopen(geo).read().decode('utf-8')
+      print(ip)
+      ext()
+    elif choice == 4:
+      dz = input('\033[92mEnter IP Address : \033[92m')
+      sub = "http://api.hackertarget.com/subnetcalc/?q=" + dz
+      net = urllib.request.urlopen(sub).read().decode('utf-8')
+      print(net)
+      ext()
+    elif choice == 5:
+      dz = input('\033[96mEnter IP Address : \033[96m')
+      port = "http://api.hackertarget.com/nmap/?q=" + dz
+      scan = urllib.request.urlopen(port).read().decode('utf-8')
+      print(scan)
+      ext()
+    elif choice == 6:
+      dz = input('\033[91mEnter Your Domain :\033[91m')
+      get = "https://api.hackertarget.com/pagelinks/?q=" + dz
+      page = urllib.request.urlopen(get).read().decode('utf-8')
+      print(page)
+      ext()
+    elif choice == 7:
+      dz = input('\033[92mEnter Your Domain :\033[92m')
+      zon = "http://api.hackertarget.com/zonetransfer/?q=" + dz
+      tran = urllib.request.urlopen(zon).read().decode('utf-8')
+      print(tran)
+      ext()
+    elif choice == 8:
+      dz = input('\033[96mEnter Your Domain :\033[96m')
+      hea = "http://api.hackertarget.com/httpheaders/?q=" + dz
+      der = urllib.request.urlopen(hea).read().decode('utf-8')
+      print(der)
+      ext()
+    elif choice == 9:
+      dz = input('\033[91mEnter Your Domain :\033[91m')
+      host = "http://api.hackertarget.com/hostsearch/?q=" + dz
+      finder = urllib.request.urlopen(host).read().decode('utf-8')
+      print(finder)
+      ext()
+    elif choice == 10:
+      dz = input('\033[91mEnter Your IP Address :\033[91m')
+      host = "http://ip-api.com/json/" + dz
+      kader = urllib.request.urlopen(host).read().decode('utf-8')
+      print(kader)
+      ext()
+    elif choice == 11:
+      dz = input('\033[1;91mEnter Domain: \033[1;m')
+      host = "http://api.hackertarget.com/findshareddns/?q=" + dz
+      dns = urllib.request.urlopen(host).read().decode('utf-8')
+      print(dns)
+      ext()
+    elif choice == 12:
+      dz = input('\033[91mEnter Your Domain :\033[91m')
+      get = "https://api.hackertarget.com/mtr/?q=" + dz
+      page = urllib.request.urlopen(get).read().decode('utf-8')
+      print(page)
+      ext()
+    elif choice == 14:
+      dz = input('\033[91mEnter Your Domain :\033[91m')
+      path = os.getcwd()
+      os.system('cd ' + path + '/modules && python3 theHarvester.py -d %s -b all' % dz)
+      ext()
+    elif choice == 15:
+      print("This feature operates only in Linux systems\033[92m")
+      path = os.getcwd() 
+      os.system('cd ' + path + ' && bash install')     
+      os.system('cd ' + path + ' && python3 update.py')
+      ext()
+    elif choice == 16:
+      slowprint("............... ")
+      slowprint("Name : CyberScan \033[92m")
+      slowprint("...............")
+      slowprint("Version : 1.0 \033[91m")
+      slowprint(".............")
+      slowprint("Author: CaptainMGC \033[96m")
+      slowprint("......................")
+      slowprint("Github : https://github.com/captainmgc \033[92m")
+      slowprint(".........................................")
+      ext() 
+    elif choice == 00:
+      print("Good-bye!!")
+  except(KeyboardInterrupt):
+    print("\nCtrl + C -> Exiting!!")
+  except ValueError:
+    print("\nPlease enter a valid number!")
+    select()
+
+select()
